@@ -39,15 +39,15 @@ func recurrence(list []*Menu) []*Menu {
 		}
 		data[v.Pid][v.Id] = v
 	}
-	result := makeTreeCore(0, data)
+	result := buildTree(0, data)
 	return result
 }
 
-func makeTreeCore(index int, data map[int]map[int]*Menu) []*Menu {
+func buildTree(index int, data map[int]map[int]*Menu) []*Menu {
 	tmp := make([]*Menu, 0, len(data[index]))
 	for id, item := range data[index] {
 		if data[id] != nil {
-			item.Child = makeTreeCore(id, data)
+			item.Child = buildTree(id, data)
 		}
 		tmp = append(tmp, item)
 	}
